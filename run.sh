@@ -1,1 +1,1 @@
-docker run -p 8000:8000 hello-uwsgi 
+docker-compose up

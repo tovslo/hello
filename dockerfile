@@ -7,10 +7,14 @@ FROM python:3.6.3
 
 # рабочая директория в контетйнере
 RUN mkdir -p /opt/services/djangoapp/src
-WORKDIR /opt/services/djangoapp/src/hello
+WORKDIR /opt/services/djangoapp/src
 
 # установка зависимостей в контейнере
-RUN pip3 install django uwsgi
+# we use --system flag because we don't need an extra virtualenv
+COPY Pipfile Pipfile.lock /opt/services/djangoapp/src/
+RUN pip install pipenv && pipenv install --system
+
+WORKDIR /opt/services/djangoapp/src/hello
 
 # копируем проект в директорию контейнера
 COPY . /opt/services/djangoapp/src
@@ -20,3 +24,4 @@ EXPOSE 8000
 
 # команда, запускаемая в котнейнере
 CMD ["uwsgi", "--ini", "uwsgi.ini"]
+#CMD ["bash"]
