@@ -33,7 +33,7 @@ services:
     networks:  # <-- connect to the bridge
       - hellodb_network
     volumes:
-      - hellodb_volume:/var/lib/postgresql/data
+      - /home/zve/data:/var/lib/postgresql/data
 
 
 networks:  # <-- and here
@@ -44,7 +44,7 @@ networks:  # <-- and here
 
 
 volumes:
-  hellodb_volume:
+ # hellodb_volume:
   static_volume:  # <-- declare the static volume
   media_volume:  # <-- declare the media volume
 
