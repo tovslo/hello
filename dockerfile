@@ -1,6 +1,6 @@
-#  Контейнер, запускающий проект hello под uwsgi
-# собрать:      docker build . -t hello-uwsgi
-# запустить:    docker run -p 8000:8000 hello-uwsgi 
+#  Контейнер, запускающий проект hello под uwsgi для nginx
+# собрать:      docker build . -t hello-uwsgi-nginx
+# запустить:    docker run -p 8001:8001 hello-uwsgi-nginx 
 
 # пляшем от питона
 FROM python:3.6.3

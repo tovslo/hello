@@ -1,9 +1,35 @@
 version: '3'
 
 services:
+
   djangoapp:
     build: .
     volumes:
       - .:/opt/services/djangoapp/src
+      - static_volume:/opt/services/djangoapp/src/hello/static  # <-- bind the static volume
+    networks:  # <-- here
+      - nginx_network
+
+
+  nginx:
+    image: nginx:1.14.1
     ports:
-      - 8000:8000
+      - 8000:80
+    volumes:
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
+      - static_volume:/opt/services/djangoapp/src/hello/static  # <-- bind the static volume
+    depends_on:  # <-- wait for djangoapp to be "ready" before starting this service
+      - djangoapp
+    networks:  # <-- here
+      - nginx_network
+
+
+networks:  # <-- and here
+  nginx_network:
+    driver: bridge      
+
+volumes:
+  database1_volume:
+  static_volume:  # <-- declare the static volume
+  media_volume:  # <-- declare the media volume
+
