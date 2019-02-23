@@ -1,0 +1,1 @@
+docker-compose run --rm djangoapp /bin/bash -c "python3 ./manage.py makemigrations"
