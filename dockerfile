@@ -1,6 +1,6 @@
-#  Контейнер, запускающий проект hello под django dev server
-# собрать:      docker build . -t hello
-# запустить:    docker run -p 8000:8000 hello 
+#  Контейнер, запускающий проект hello под uwsgi
+# собрать:      docker build . -t hello-uwsgi
+# запустить:    docker run -p 8000:8000 hello-uwsgi 
 
 # пляшем от питона
 FROM python:3.6.3
@@ -10,7 +10,7 @@ RUN mkdir -p /opt/services/djangoapp/src
 WORKDIR /opt/services/djangoapp/src/hello
 
 # установка зависимостей в контейнере
-RUN pip3 install django
+RUN pip3 install django uwsgi
 
 # копируем проект в директорию контейнера
 COPY . /opt/services/djangoapp/src
@@ -19,4 +19,4 @@ COPY . /opt/services/djangoapp/src
 EXPOSE 8000
 
 # команда, запускаемая в котнейнере
-CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["uwsgi", "--ini", "uwsgi.ini"]

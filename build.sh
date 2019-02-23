@@ -1,1 +1,1 @@
-docker build . -t hello
+docker build . -t hello-uwsgi
