@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% block title %}Index{% endblock title %}
-{% block header %}Главная{% endblock header %}
+{% block header %}Пример шаблона в Django{% endblock header %}
 {% block content %}
-    <h1><a href="/form/">Форма</a></h1>
-    <h1><a href="/getdb/">База данных</a></h1>
     {% load staticfiles %}
-    <img src="{% static 'images/s1200.webp' %}" alt="Четкий мотик" >
-
+    <h2>Статика (картинки и стили):</h2>
+    <img src="{% static 'images/s1200.webp' %}" alt="Если видон эот текст, то статика не работает" >
+    <h2>Специальные тэги в шаблоне:</h2>
     <!-- дата, время -->
+    <h3>Дата, время:</h3>
     <p>{% now "N j, Y, P" %}</p>
-
+    <h3>Условные операторы и циклы:</h3>
     <!-- if-elif-else -->
     <p>{{data.n}} -
     {% if data.n > 0 %}
@@ -28,6 +28,7 @@
         <li>Langs array is empty</li>
         {% endfor %}
     </ul>
+    <h3>Переменные:</h3>
     <!-- переменные -->
     {% with name="Tom" age=29 %}
         <div>
@@ -35,6 +36,8 @@
             <p>Age: {{ age }}</p>
         </div>
     {% endwith %}
+    <h2><a href="/form/">Форма</a></h2>
+    <h2><a href="/getdb/">База данных</a></h2>
 
 {% endblock content %}
 
